@@ -1,0 +1,11 @@
+---
+
+- name: copy the vim syntax file
+  copy: src=nginx.vim dest={{ vim_share_folder }}/syntax/nginx.vim
+
+- name: active the vim syntax file
+  lineinfile:
+  args:
+    dest: "{{ vim_share_folder }}/filetype.vim"
+    line: "au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == \\'\\' | setfiletype nginx | endif"
+
